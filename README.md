@@ -17,7 +17,7 @@ Fingerprint Mirror is a zero-dependency web app. It runs the same techniques rea
 - **Randomization detection**: canvas and audio are sampled twice. If the results differ, the browser is adding noise (Brave, Firefox RFP), and those signals stop counting toward uniqueness
 - **"Does it follow you?"**: compares against your previous scans (kept in `localStorage`) and lists exactly which signals changed
 - **Defense checklist** and guidance (blend in vs. randomize)
-- Export the full report as JSON, light/dark themes, responsive down to phone width, respects `prefers-reduced-motion`
+- Export the full report as JSON, dark theme shared with [blazexyz.com](https://blazexyz.com), responsive down to phone width, respects `prefers-reduced-motion`
 
 ## Running it
 
@@ -35,7 +35,7 @@ Then open http://localhost:8080. Opening `index.html` directly also works, but s
 
 ```
 index.html          Page layout and copy
-css/styles.css      Theme tokens (light/dark), layout, animation
+css/styles.css      Page tokens (mapped onto bz-theme.css), layout, animation
 js/hash.js          cyrb128 hash + stable JSON serialization
 js/collectors.js    The 20 signal collectors (each isolated, timed out, error-safe)
 js/entropy.js       Entropy model → bits → "1 in N"

@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fingerprint Mirror</title>
   <meta name="description" content="See everything a website can learn about your browser without a single cookie, and how unique that makes you. Runs entirely in your browser.">
-  <meta name="theme-color" content="#0b0e13">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%232dd4bf' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M9 26c-2-3-3-6-3-10a10 10 0 0 1 20 0'/%3E%3Cpath d='M12 27c-1.5-3-2-6-2-11a6 6 0 0 1 12 0c0 3-.5 6-1.5 9'/%3E%3Cpath d='M16 16c0 4-.8 8-2.5 11'/%3E%3C/g%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0a070d">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23db94ed' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M9 26c-2-3-3-6-3-10a10 10 0 0 1 20 0'/%3E%3Cpath d='M12 27c-1.5-3-2-6-2-11a6 6 0 0 1 12 0c0 3-.5 6-1.5 9'/%3E%3Cpath d='M16 16c0 4-.8 8-2.5 11'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Mono:wght@300;400;500&family=Montserrat:wght@300&display=swap">
+  <link rel="stylesheet" href="bz-theme.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="bz-hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <a class="skip" href="#results">Skip to results</a>
 
   <header class="topbar">
@@ -23,9 +28,7 @@
       <a href="#defend">Defend</a>
       <a href="#how">How it works</a>
     </nav>
-    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle color theme">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-9.54-4.9A9 9 0 0 0 12 3Z"/></svg>
-    </button>
+    <a class="bz-home" href="https://blazexyz.com">blazexyz.com</a>
   </header>
 
   <main>
@@ -37,7 +40,7 @@
 
       <div class="hero-body">
         <p class="eyebrow">No cookies · No login · Nothing leaves your device</p>
-        <h1>This is what every website sees when you visit.</h1>
+        <h1 class="bz-sans">This is what every website <span class="bz-script">sees</span> when you visit.</h1>
         <p class="lede">Your browser hands out dozens of small details about your device just by loading a page. None are secret on their own, but combined they form a <strong>fingerprint</strong> that can recognize you across sites, even in a private window and after clearing cookies.</p>
 
         <div class="id-block">

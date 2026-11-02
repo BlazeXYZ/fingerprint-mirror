@@ -4,7 +4,6 @@
 
   const $ = sel => document.querySelector(sel);
   const HISTORY_KEY = 'fm-history';
-  const THEME_KEY = 'fm-theme';
   const PLACEHOLDER = '9e3779b97f4a7c15f39cc0605cedc834';
 
   const state = { results: [], id: null, summary: null, filter: 'all', scanning: false };
@@ -19,20 +18,6 @@
       try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* storage blocked: history just won't persist */ }
     }
   };
-
-  /* ---------- Theme ---------- */
-
-  function initTheme() {
-    const saved = store.get(THEME_KEY, null);
-    if (saved) document.documentElement.dataset.theme = saved;
-    $('#theme-toggle').addEventListener('click', () => {
-      const current = document.documentElement.dataset.theme ||
-        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
-      store.set(THEME_KEY, next);
-    });
-  }
 
   /* ---------- Scan ---------- */
 
@@ -306,7 +291,6 @@
   /* ---------- Init ---------- */
 
   function init() {
-    initTheme();
     $('#btn-rescan').addEventListener('click', scan);
     $('#btn-copy').addEventListener('click', copyId);
     $('#btn-export').addEventListener('click', exportJson);
