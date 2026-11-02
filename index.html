@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fingerprint Mirror</title>
+  <meta name="description" content="See everything a website can learn about your browser without a single cookie, and how unique that makes you. Runs entirely in your browser.">
+  <meta name="theme-color" content="#0b0e13">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%232dd4bf' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M9 26c-2-3-3-6-3-10a10 10 0 0 1 20 0'/%3E%3Cpath d='M12 27c-1.5-3-2-6-2-11a6 6 0 0 1 12 0c0 3-.5 6-1.5 9'/%3E%3Cpath d='M16 16c0 4-.8 8-2.5 11'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Fingerprint Mirror home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 26c-2-3-3-6-3-10a10 10 0 0 1 20 0"/><path d="M12 27c-1.5-3-2-6-2-11a6 6 0 0 1 12 0c0 3-.5 6-1.5 9"/><path d="M16 16c0 4-.8 8-2.5 11"/></g></svg>
+      <span>Fingerprint Mirror</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#breakdown">Breakdown</a>
+      <a href="#results">Signals</a>
+      <a href="#defend">Defend</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle color theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-9.54-4.9A9 9 0 0 0 12 3Z"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="print-wrap" aria-hidden="true">
+        <svg id="print" class="print scanning" viewBox="0 0 200 240"></svg>
+        <div class="scanline"></div>
+      </div>
+
+      <div class="hero-body">
+        <p class="eyebrow">No cookies · No login · Nothing leaves your device</p>
+        <h1>This is what every website sees when you visit.</h1>
+        <p class="lede">Your browser hands out dozens of small details about your device just by loading a page. None are secret on their own, but combined they form a <strong>fingerprint</strong> that can recognize you across sites, even in a private window and after clearing cookies.</p>
+
+        <div class="id-block">
+          <span class="label">Your browser fingerprint</span>
+          <code id="fp-id" aria-live="polite">scanning…</code>
+        </div>
+
+        <dl class="stats">
+          <div><dt>Identifying information</dt><dd id="stat-bits">—</dd></div>
+          <div><dt>Browsers that share it</dt><dd id="stat-crowd">—</dd></div>
+          <div><dt>Signals read</dt><dd id="stat-signals">—</dd></div>
+        </dl>
+
+        <div class="actions">
+          <button class="btn primary" id="btn-rescan" type="button">Scan again</button>
+          <button class="btn" id="btn-copy" type="button" disabled>Copy ID</button>
+          <button class="btn" id="btn-export" type="button" disabled>Export JSON</button>
+        </div>
+
+        <div class="progress" id="progress" role="status">
+          <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+          <span id="progress-text">Starting scan…</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panels" aria-label="Summary">
+      <article class="panel" id="stability">
+        <h2>Does it follow you?</h2>
+        <div id="stability-body"><p class="muted">Waiting for scan…</p></div>
+        <p class="tip"><strong>Try it:</strong> open this page in a private / incognito window. Cookies and history are wiped there, but your fingerprint ID will most likely be the same.</p>
+      </article>
+      <article class="panel" id="protections">
+        <h2>Your defenses</h2>
+        <ul class="checks" id="protections-list"><li class="muted">Waiting for scan…</li></ul>
+      </article>
+    </section>
+
+    <section id="breakdown" class="section">
+      <div class="section-head">
+        <h2>Where your uniqueness comes from</h2>
+        <p class="muted">Estimated bits of identifying information per signal. Each bit halves the number of people who look like you.</p>
+      </div>
+      <div class="bars" id="bars"></div>
+      <p class="note" id="bars-note"></p>
+    </section>
+
+    <section id="results" class="section">
+      <div class="section-head">
+        <h2>Every signal, explained</h2>
+        <p class="muted">Collected with ordinary JavaScript. The hash on each card lets you compare what changes between browsers and devices.</p>
+      </div>
+      <div class="filters" id="filters" role="toolbar" aria-label="Filter by category"></div>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section id="defend" class="section">
+      <div class="section-head">
+        <h2>How to defend yourself</h2>
+        <p class="muted">There are two strategies: look like everyone else, or look different every time. Clearing cookies does neither.</p>
+      </div>
+      <div class="tips">
+        <article class="tip-card">
+          <span class="tag">Blend in</span>
+          <h3>Use a browser that makes everyone identical</h3>
+          <p>Tor Browser and Mullvad Browser report the same screen size, fonts, time zone and GPU for every user. You disappear into the crowd.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tag">Randomize</span>
+          <h3>Add noise to the readings</h3>
+          <p>Brave adds small random changes to canvas, audio and WebGL output per site and per session, so the hash never matches twice.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tag">Harden</span>
+          <h3>Turn on Firefox fingerprinting protection</h3>
+          <p>Enhanced Tracking Protection on <em>Strict</em> blocks known fingerprinting scripts. <code>privacy.resistFingerprinting</code> goes further, at some cost to convenience.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tag">Block</span>
+          <h3>Stop the scripts from running</h3>
+          <p>Content blockers like uBlock Origin block many tracking scripts before they can collect anything. That only works for scripts already on their lists.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tag">Simplify</span>
+          <h3>Customize less</h3>
+          <p>Every extra font, extension, language and unusual setting makes you rarer. The defaults are the crowd.</p>
+        </article>
+        <article class="tip-card">
+          <span class="tag">Myth</span>
+          <h3>Private mode and VPNs don't help here</h3>
+          <p>Incognito wipes cookies and a VPN hides your IP, but neither changes your fonts, GPU or screen. The fingerprint survives both.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="section how">
+      <div class="section-head">
+        <h2>How it works</h2>
+      </div>
+      <div class="prose">
+        <p>When the page loads, about twenty collectors run in parallel. Each reads one family of signals using standard browser APIs: <code>navigator</code>, <code>screen</code>, <code>Intl</code>, Canvas&nbsp;2D, WebGL, WebGPU, Web Audio, CSS media queries, the Permissions API and Speech Synthesis. Nothing asks for permission and nothing is sent anywhere. There is no server, so you can confirm it in your browser's network tab.</p>
+        <p>Signals that stay the same across restarts are combined into one 128-bit hash: your fingerprint ID. Signals that change all the time, such as window size, battery and network speed, are shown but left out of the hash. The page draws the canvas and runs the audio test twice. If the two results differ, your browser is adding noise, and those signals stop counting.</p>
+        <p>The uniqueness figure is an <strong>estimate</strong>. Real fingerprinting services compare you against a database of millions of other visitors. This page has no database, so each signal gets an entropy value based on published research (<cite>Eckersley, “How Unique Is Your Web Browser?”, 2010</cite>; <cite>Laperdrix et al., AmIUnique, 2016</cite>; <cite>Gómez-Boix et al., “Hiding in the Crowd”, 2018</cite>). That value is adjusted for how common your actual value is, then the total is scaled down because signals overlap. The 2018 study is a useful reality check: across two million real visitors, about a third of desktop browsers were unique. Mobile browsers were unique far less often.</p>
+        <p>Your last ten fingerprint IDs are kept in this browser's <code>localStorage</code>, only so you can see what changed between visits. Nothing else is stored.</p>
+      </div>
+      <details class="raw">
+        <summary>View the raw data collected</summary>
+        <pre id="raw-json">Waiting for scan…</pre>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Fingerprint Mirror runs 100% in your browser. No analytics, no cookies, no requests after page load.</p>
+  </footer>
+
+  <script src="js/hash.js"></script>
+  <script src="js/collectors.js"></script>
+  <script src="js/entropy.js"></script>
+  <script src="js/ridges.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
